@@ -24,9 +24,10 @@ public class TransactionService {
 	
 	public boolean checkTransaction(Transaction ts) {
 		System.out.println("checking the feasibility of transaction occurance");
-		Customer c = ts.getCustomer();
-		double remainingBalance = c.getClearBalance() - ts.getCurrencyAmount() - (ts.getCurrencyAmount()*0.0025);
-		boolean overdraft = c.isOverdraftFlag();
+		String c = ts.getCustomer().getCustomerId();
+		double remainingBalance = custRepo.findById(c).get().getClearBalance() - ts.getAmount() - (ts.getAmount()*0.0025);
+		boolean overdraft = custRepo.findById(c).get().isOverdraftFlag();
+		System.out.println(overdraft);
 		if(remainingBalance>=0 || overdraft) {
 			return updateINR(ts);
 		}
@@ -36,8 +37,8 @@ public class TransactionService {
 
 	
 	public boolean updateINR(Transaction ts) {
-		double transferFee = ts.getCurrencyAmount()*0.0025;
-		double total = ts.getCurrencyAmount() + transferFee;
+		double transferFee = ts.getAmount()*0.0025;
+		double total = ts.getAmount() + transferFee;
 		LocalDate d1 = LocalDate.now();
 		ts.setTranferFees(transferFee);
 		ts.setTotalAmount(total);

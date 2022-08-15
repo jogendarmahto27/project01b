@@ -21,18 +21,15 @@ public class Transaction {
 	@ManyToOne
 	@JoinColumn(name="customer")
 	private Customer customer;
-	@Column(name="senderbic",length=50)
-	private String senderBIC;
 	@Column(name="receiverbic",length=50)
 	private String receiverBIC;
-	private String receiverAccountHolderNumber;
-	private String receiverAccountHolderName;
+	private String receiverAccountNumber;
+	private String receiverAccountName;
 	@Column(length=50)
-	private String transferTypeCode;
-	@OneToOne
-	@JoinColumn(name="messagecode")
-	private Message message;
-	private double currencyAmount;
+	private String transferType;
+	@Column(length=150)
+	private String message;
+	private double amount;
 	private double tranferFees;
 	private double totalAmount;
 	private LocalDate transferDate;
@@ -40,36 +37,33 @@ public class Transaction {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Transaction(int transactionId, Customer customer, String senderBIC, String receiverBIC,
-			String receiverAccountHolderNumber, String receiverAccountHolderName, String transferTypeCode,
-			Message message, double currencyAmount, double tranferFees, double totalAmount, LocalDate transferDate) {
+	public Transaction(int transactionId, Customer customer, String receiverBIC, String receiverAccountNumber,
+			String receiverAccountName, String transferType, String message, double amount, double tranferFees,
+			double totalAmount, LocalDate transferDate) {
 		super();
 		this.transactionId = transactionId;
 		this.customer = customer;
-		this.senderBIC = senderBIC;
 		this.receiverBIC = receiverBIC;
-		this.receiverAccountHolderNumber = receiverAccountHolderNumber;
-		this.receiverAccountHolderName = receiverAccountHolderName;
-		this.transferTypeCode = transferTypeCode;
+		this.receiverAccountNumber = receiverAccountNumber;
+		this.receiverAccountName = receiverAccountName;
+		this.transferType = transferType;
 		this.message = message;
-		this.currencyAmount = currencyAmount;
+		this.amount = amount;
 		this.tranferFees = tranferFees;
 		this.totalAmount = totalAmount;
 		this.transferDate = transferDate;
 	}
-
-	public int TransactionId() {
+	public int getTransactionId() {
 		return transactionId;
 	}
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
-	public String getSenderBIC() {
-		return senderBIC;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setSenderBIC(String senderBIC) {
-		this.senderBIC = senderBIC;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	public String getReceiverBIC() {
 		return receiverBIC;
@@ -77,37 +71,35 @@ public class Transaction {
 	public void setReceiverBIC(String receiverBIC) {
 		this.receiverBIC = receiverBIC;
 	}
-	public String getReceiverAccountHolderNumber() {
-		return receiverAccountHolderNumber;
+	public String getReceiverAccountNumber() {
+		return receiverAccountNumber;
 	}
-	public void setReceiverAccountHolderNumber(String receiverAccountHolderNumber) {
-		this.receiverAccountHolderNumber = receiverAccountHolderNumber;
+	public void setReceiverAccountNumber(String receiverAccountNumber) {
+		this.receiverAccountNumber = receiverAccountNumber;
 	}
-	public String getReceiverAccountHolderName() {
-		return receiverAccountHolderName;
+	public String getReceiverAccountName() {
+		return receiverAccountName;
 	}
-	public void setReceiverAccountHolderName(String receiverAccountHolderName) {
-		this.receiverAccountHolderName = receiverAccountHolderName;
+	public void setReceiverAccountName(String receiverAccountName) {
+		this.receiverAccountName = receiverAccountName;
 	}
-	public String getTransferTypeCode() {
-		return transferTypeCode;
+	public String getTransferType() {
+		return transferType;
 	}
-	public void setTransferTypeCode(String transferTypeCode) {
-		this.transferTypeCode = transferTypeCode;
+	public void setTransferType(String transferType) {
+		this.transferType = transferType;
 	}
-	public Message getMessage() {
+	public String getMessage() {
 		return message;
 	}
-	public void setMessage(Message message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-
-	public double getCurrencyAmount() {
-		return currencyAmount;
+	public double getAmount() {
+		return amount;
 	}
-	public void setCurrencyAmount(double currencyAmount) {
-		this.currencyAmount = currencyAmount;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 	public double getTranferFees() {
 		return tranferFees;
@@ -127,22 +119,12 @@ public class Transaction {
 	public void setTransferDate(LocalDate transferDate) {
 		this.transferDate = transferDate;
 	}
-	
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	@Override
 	public String toString() {
-		return "Transaction [transactionId=" + transactionId + ", senderBIC=" + senderBIC
-				+ ", receiverBIC=" + receiverBIC + ", receiverAccountHolderNumber=" + receiverAccountHolderNumber
-				+ ", receiverAccountHolderName=" + receiverAccountHolderName + ", transferTypeCode=" + transferTypeCode
-				+ ", message=" + message + ", currencyAmount=" + currencyAmount + ", tranferFees=" + tranferFees
-				+ ", inrAmount=" + totalAmount + ", transferDate=" + transferDate + "]";
+		return "Transaction [transactionId=" + transactionId + ", customer=" + customer + ", receiverBIC=" + receiverBIC
+				+ ", receiverAccountNumber=" + receiverAccountNumber + ", receiverAccountName=" + receiverAccountName
+				+ ", transferType=" + transferType + ", message=" + message + ", amount=" + amount + ", tranferFees="
+				+ tranferFees + ", totalAmount=" + totalAmount + ", transferDate=" + transferDate + "]";
 	}
-}
 	
+}

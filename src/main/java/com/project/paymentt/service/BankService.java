@@ -13,13 +13,25 @@ public class BankService {
 	@Autowired
 	private BankRepository bankRepository;
 	
-	public Optional<Bank> getBank(String id) {
-		Optional<Bank> c = bankRepository.findById(id);
-		return c;
+	public Optional<Bank> getBank(String id) throws Exception {
+		Optional<Bank> b = null;
+		try {
+			b = bankRepository.findById(id);
+			return b;
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}
+
 	}
 	
-	public Bank postDetails(Bank bank){
-		return bankRepository.save(bank);
+	public void postDetails(Bank bank) throws Exception{
+		try {
+			bankRepository.save(bank);
+		}catch(Exception e) {
+			throw new Exception(e);
+		}
+		
 	}
 
 }

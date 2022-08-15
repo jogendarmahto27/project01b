@@ -18,27 +18,27 @@ import com.project.paymentt.service.TransactionService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/transaction")
 public class TransactionRestController {
 	@Autowired
 	private TransactionService transService;
 	
-	@PostMapping("/newtransaction")
+	@PostMapping("/new")
 	public String addTransaction(@RequestBody Transaction transaction) {
 		System.out.println(transaction);
 		if(transService.checkTransaction(transaction)) {
-			return "transaction successful";
+			return "transaction success";
 		}
 		return "transaction failed";
 	}
 	
-	@GetMapping("/viewtransaction")
+	@GetMapping("/all")
 	public List<Transaction> getAllTransactions(){
 		List<Transaction> t = transService.getTransactions();
 		return t;
 	}
 	
-	@GetMapping("/viewTransaction/{id}")
+	@GetMapping("/{id}")
 	public Optional<Transaction> getTransactionById(@PathVariable Integer id){
 		return transService.findTransactionById(id);
 	}

@@ -26,14 +26,14 @@ public class BankRestController {
 	private BankService bankService;
 	
 	@GetMapping("/{bic}")
-	public Optional<Bank> getBankDetails(@PathVariable String bic) {
+	public Optional<Bank> getBankDetails(@PathVariable String bic) throws Exception {
 		return bankService.getBank(bic);
 		
 	}
 	
 	@PostMapping("/save")
-	public Bank saveBank(@RequestBody Bank bank) {
-		return bankService.postDetails(bank);
+	public void saveBank(@RequestBody Bank bank) throws Exception {
+		bankService.postDetails(bank);
 	}
 
 }

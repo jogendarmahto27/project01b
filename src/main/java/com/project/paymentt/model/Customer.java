@@ -29,37 +29,19 @@ public class Customer {
 //	private Bank bicCustomer;
 	private boolean overdraftFlag;
 	private double clearBalance;
-	private String customerAddress;
-	private String customerCity;
 //	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="customerid")
-	@OneToMany(targetEntity = Transaction.class,cascade=CascadeType.ALL,mappedBy="customer")
+//	@OneToMany(targetEntity = Transaction.class,cascade=CascadeType.ALL,mappedBy="customer")
 //	@JoinColumn(name="hello",referencedColumnName="customer_id")
-	private List<Transaction> transactions;
-	//	@JoinColumn(name="customer_id_ref",referencedColumnName="customer_id")
-	
-	public List<Transaction> getTransactions() {
-		return transactions;
-	}
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
-	}
-//	public void setTransactions(Transaction ts) {
-//		this.transactions = (List<Transaction>) ts;
-//	}
-	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Customer(String customerId, String accountHolderName, boolean overdraftFlag, double clearBalance,
-			String customerAddress, String customerCity) {
+	public Customer(String customerId, String accountHolderName, boolean overdraftFlag, double clearBalance) {
 		super();
 		this.customerId = customerId;
 		this.accountHolderName = accountHolderName;
 		this.overdraftFlag = overdraftFlag;
 		this.clearBalance = clearBalance;
-		this.customerAddress = customerAddress;
-		this.customerCity = customerCity;
 	}
 	public String getCustomerId() {
 		return customerId;
@@ -85,25 +67,13 @@ public class Customer {
 	public void setClearBalance(double clearBalance) {
 		this.clearBalance = clearBalance;
 	}
-	public String getCustomerAddress() {
-		return customerAddress;
-	}
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
-	}
-	public String getCustomerCity() {
-		return customerCity;
-	}
-	public void setCustomerCity(String customerCity) {
-		this.customerCity = customerCity;
-	}
-	
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", accountHolderName=" + accountHolderName + ", overdraftFlag="
-				+ overdraftFlag + ", clearBalance=" + clearBalance + ", customerAddress=" + customerAddress
-				+ ", customerCity=" + customerCity + "]";
+				+ overdraftFlag + ", clearBalance=" + clearBalance + "]";
 	}
 	
-	
+
+
+
 }
